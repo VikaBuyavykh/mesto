@@ -1,0 +1,7 @@
+.element__img {
+    margin: 0;
+    width: 282px;
+    height: 282px;
+    object-fit: contain;
+    object-position: center;
+}
