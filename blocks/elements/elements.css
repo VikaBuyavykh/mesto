@@ -1,16 +1,10 @@
 .elements {
     margin: 51px 0 0;
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 282px);
-    grid-template-rows: repeat(auto-fill, 359px);
-    gap: 20px 17px;
-    justify-content: center;
-    align-items: stretch;
+    width: 100%;
 }
 
 @media screen and (max-width: 650px) {
     .elements {
-        margin-top: 38px;
+        margin-top: 36px;
     }
 }

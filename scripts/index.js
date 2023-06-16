@@ -8,20 +8,16 @@ let occupationFormElement = document.querySelector('#occupation');
 let formElement = document.querySelector('.popup__form');
 
 function handleClickOpen() {
-popupElement.classList.add('popup_opened');
-};
-
-function handleClickClose() {
-    popupElement.classList.remove('popup_opened');
-    };
-
-function changeText() {
+    popupElement.classList.add('popup_opened');
     nameFormElement.value = nameElement.textContent;
     occupationFormElement.value = occupationElement.textContent;
 };
 
+function handleClickClose() {
+    popupElement.classList.remove('popup_opened');
+};
+
 editButtonElement.addEventListener('click', handleClickOpen);
-editButtonElement.addEventListener('click', changeText);
 closeButtonElement.addEventListener('click', handleClickClose);
 
 function handleFormSubmit(evt) {
@@ -30,7 +26,7 @@ function handleFormSubmit(evt) {
     let occupationInput = occupationFormElement.value;
     nameElement.textContent = nameInput;
     occupationElement.textContent = occupationInput;
+    popupElement.classList.remove('popup_opened');
 };
 
 formElement.addEventListener('submit', handleFormSubmit);
-formElement.addEventListener('submit', handleClickClose);

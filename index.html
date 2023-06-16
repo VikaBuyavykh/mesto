@@ -14,7 +14,6 @@
             <img src="./images/logo.png" alt="Изображение логотипа 
             с надписью Mesto и подписью Russia в верхнем регистре" 
             class="header__logo">
-            <div class="header__line"></div>
         </header>
 
         <main class="content">
@@ -23,80 +22,85 @@
                 <div class="profile__content">
                     <div class="profile__avatar"></div>
                     <div class="profile__info">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button"></button>
+                        <div class="profile__name-section">
+                            <h1 class="profile__name">Жак-Ив Кусто</h1>
+                            <button aria-label="Редактировать" type="button" 
+                            class="profile__edit-button"></button>
+                        </div>
                         <p class="profile__occupation">Исследователь океана</p>
                     </div>
                 </div>
-                <button class="profile__add-button">
-                    <img src="./images/add-button.png" alt="Значок плюса: 
+                <button aria-label="Добавить" type="button" class="profile__add-button">
+                    <img src="./images/plus.svg" alt="Значок плюса: 
                     кнопка добавления контента" class="profile__add-button-plus">
                 </button> 
             </section>
 
             <section class="elements">
-                <div class="element">
-                    <img src="./images/karachaevsk.jpg" alt="Пейзаж горной местности, 
-                    на переднем плане — развалины храма, поросшего зеленью" class="element__img">
-                    <div class="element__text-section">
-                        <h2 class="element__text">Карачаевск</h2>
-                        <button class="element__like-button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/gora-elbrus-1.jpg" alt="Пейзаж: на переднем плане — равнина, 
-                    на горизонте - очертания горы" class="element__img">
-                    <div class="element__text-section">
-                        <h2 class="element__text">Гора Эльбрус</h2>
-                        <button class="element__like-button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/dombay-1.jpg" alt="Пейзаж горы со снежной шапкой" class="element__img">
-                    <div class="element__text-section">
-                        <h2 class="element__text">Домбай</h2>
-                        <button class="element__like-button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/gora-elbrus-2.jpg" alt="Пейзаж: на переднем плане — равнина, 
-                    на горизонте - очертания горы" class="element__img">
-                    <div class="element__text-section">
-                        <h2 class="element__text">Гора Эльбрус</h2>
-                        <button class="element__like-button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/dombay-2.jpg" alt="Пейзаж горы со снежной шапкой" class="element__img">
-                    <div class="element__text-section">
-                        <h2 class="element__text">Домбай</h2>
-                        <button class="element__like-button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/karachaevo-ch.jpg" alt="Пейзаж горной местности, 
-                    на переднем плане — развалины храма, поросшего зеленью" class="element__img">
-                    <div class="element__text-section">
-                        <h2 class="element__text">Карачаево-Черкесия</h2>
-                        <button class="element__like-button"></button>
-                    </div>
-                </div>
+                <ul class="elements__list">
+                    <li class="element">
+                        <img src="./images/karachaevsk.jpg" alt="Пейзаж горной местности, 
+                        на переднем плане — развалины храма, поросшего зеленью" class="element__img">
+                        <div class="element__text-section">
+                            <h2 class="element__text">Карачаевск</h2>
+                            <button aria-label="Нравится" type="button" class="element__like-button"></button>
+                        </div>
+                    </li>
+                    <li class="element">
+                        <img src="./images/gora-elbrus-1.jpg" alt="Пейзаж: на переднем плане — равнина, 
+                        на горизонте - очертания горы" class="element__img">
+                        <div class="element__text-section">
+                            <h2 class="element__text">Гора Эльбрус</h2>
+                            <button aria-label="Нравится" type="button" class="element__like-button"></button>
+                        </div>
+                    </li>
+                    <li class="element">
+                        <img src="./images/dombay-1.jpg" alt="Пейзаж горы со снежной шапкой" class="element__img">
+                        <div class="element__text-section">
+                            <h2 class="element__text">Домбай</h2>
+                            <button aria-label="Нравится" type="button" class="element__like-button"></button>
+                        </div>
+                    </li>
+                    <li class="element">
+                        <img src="./images/gora-elbrus-2.jpg" alt="Пейзаж: на переднем плане — равнина, 
+                        на горизонте - очертания горы" class="element__img">
+                        <div class="element__text-section">
+                            <h2 class="element__text">Гора Эльбрус</h2>
+                            <button aria-label="Нравится" type="button" class="element__like-button"></button>
+                        </div>
+                    </li>
+                    <li class="element">
+                        <img src="./images/dombay-2.jpg" alt="Пейзаж горы со снежной шапкой" class="element__img">
+                        <div class="element__text-section">
+                            <h2 class="element__text">Домбай</h2>
+                            <button aria-label="Нравится" type="button" class="element__like-button"></button>
+                        </div>
+                    </li>
+                    <li class="element">
+                        <img src="./images/karachaevo-ch.jpg" alt="Пейзаж горной местности, 
+                        на переднем плане — развалины храма, поросшего зеленью" class="element__img">
+                        <div class="element__text-section">
+                            <h2 class="element__text">Карачаево-Черкесия</h2>
+                            <button aria-label="Нравится" type="button" class="element__like-button"></button>
+                        </div>
+                    </li>
+                </ul>
             </section>
 
         </main>
 
         <footer class="footer">
-            <h4 class="footer__text">© 2020 Mesto Russia</h4>
+            <h3 class="footer__text">© 2020 Mesto Russia</h3>
         </footer>
 
         <aside class="popup">
             <div class="popup__container">
-                <button class="popup__close-button"></button>
+                <button aria-label="Закрыть" type="button" class="popup__close-button"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form action="" method="get" class="popup__form">
+                <form name="nameAndOccupationForm" class="popup__form">
                     <input class="popup__form-item" type="text" id="name" name="name">
                     <input class="popup__form-item" type="text" id="occupation" name="occupation">
-                    <button class="popup__submit-button">Сохранить</button>
+                    <button aria-label="Сохранить" type="submit" class="popup__submit-button">Сохранить</button>
                 </form>
             </div>
         </aside>

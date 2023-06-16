@@ -2,7 +2,7 @@
     margin: 0;
     width: 22px;
     height: 19px;
-    background-image: url(../../../images/vector.png);
+    background-image: url(../../../images/like-button.svg);
     background-color: transparent;
     border: 0;
     cursor: pointer;
@@ -13,6 +13,6 @@
 }
 
 .element__like-button:active {
-    background-image: url(../../../images/vector-active.png);
+    background-image: url(../../../images/active-like-button.svg);
     opacity: 1;
 }

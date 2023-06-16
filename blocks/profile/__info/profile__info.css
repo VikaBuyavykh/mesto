@@ -4,8 +4,8 @@
     box-sizing: border-box;
     flex-direction: column;
     justify-content: space-between;
+    align-items: flex-start;
     gap: 7px;
-    transform: translateY(3%);
     max-width: 440px;
 }
 
@@ -18,6 +18,12 @@
 @media screen and (max-width: 1039px) {
     .profile__info {
         max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 752px) {
+    .profile__info {
+        align-items: center;
     }
 }
 

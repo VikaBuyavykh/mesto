@@ -1,7 +1,7 @@
 .popup__form-item {
     margin: 0;
-    widows: 100%;
-    min-height: 40px;
+    width: 100%;
+    padding: 13px 0 8px;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -15,5 +15,5 @@
 }
 
 .popup__form-item:first-of-type {
-    margin-bottom: 17px;
+    margin-bottom: 18px;
 }

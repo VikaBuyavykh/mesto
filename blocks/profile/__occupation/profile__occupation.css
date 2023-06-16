@@ -20,3 +20,9 @@
         text-align: center;
     }    
 }
+
+@media screen and (max-width: 752px) {
+    .profile__occupation {
+        width: 100%;
+    }    
+}
