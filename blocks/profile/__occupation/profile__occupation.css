@@ -1,5 +1,5 @@
 .profile__occupation {
-    margin: 0;        
+    margin: 0;
     width: 100%;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-style: normal;
@@ -25,5 +25,5 @@
 @media screen and (max-width: 752px) {
     .profile__occupation {
         width: 100%;
-    }    
+    }
 }
