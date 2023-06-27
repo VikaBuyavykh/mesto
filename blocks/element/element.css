@@ -1,13 +1,14 @@
 .element {
     margin: 0;
-    padding-bottom: 28px;
+    padding-bottom: 25px;
     box-sizing: content-box;
     background: #FFFFFF;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    gap: 27px;
+    gap: 25px;
+    position: relative;
 }
 
 @media screen and (max-width: 650px) {

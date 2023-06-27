@@ -37,54 +37,16 @@
             </section>
 
             <section class="elements">
-                <ul class="elements__list">
-                    <li class="element">
-                        <img src="./images/karachaevsk.jpg" alt="Пейзаж горной местности, 
-                        на переднем плане — развалины храма, поросшего зеленью" class="element__img">
+                <template id="element">
+                    <div class="element">
+                        <button aria-label="Открыть" type="button" class="element__open-button"><img alt="Пейзаж" class="element__img"></button>
                         <div class="element__text-section">
-                            <h2 class="element__text">Карачаевск</h2>
+                            <h2 class="element__text"></h2>
                             <button aria-label="Нравится" type="button" class="element__like-button"></button>
                         </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/gora-elbrus-1.jpg" alt="Пейзаж: на переднем плане — равнина, 
-                        на горизонте - очертания горы" class="element__img">
-                        <div class="element__text-section">
-                            <h2 class="element__text">Гора Эльбрус</h2>
-                            <button aria-label="Нравится" type="button" class="element__like-button"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/dombay-1.jpg" alt="Пейзаж горы со снежной шапкой" class="element__img">
-                        <div class="element__text-section">
-                            <h2 class="element__text">Домбай</h2>
-                            <button aria-label="Нравится" type="button" class="element__like-button"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/gora-elbrus-2.jpg" alt="Пейзаж: на переднем плане — равнина, 
-                        на горизонте - очертания горы" class="element__img">
-                        <div class="element__text-section">
-                            <h2 class="element__text">Гора Эльбрус</h2>
-                            <button aria-label="Нравится" type="button" class="element__like-button"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/dombay-2.jpg" alt="Пейзаж горы со снежной шапкой" class="element__img">
-                        <div class="element__text-section">
-                            <h2 class="element__text">Домбай</h2>
-                            <button aria-label="Нравится" type="button" class="element__like-button"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img src="./images/karachaevo-ch.jpg" alt="Пейзаж горной местности, 
-                        на переднем плане — развалины храма, поросшего зеленью" class="element__img">
-                        <div class="element__text-section">
-                            <h2 class="element__text">Карачаево-Черкесия</h2>
-                            <button aria-label="Нравится" type="button" class="element__like-button"></button>
-                        </div>
-                    </li>
-                </ul>
+                        <button aria-label="Удалить" type="button" class="element__delete-button"></button>
+                    </div>
+                </template>
             </section>
 
         </main>
@@ -93,15 +55,35 @@
             <h3 class="footer__text">© 2020 Mesto Russia</h3>
         </footer>
 
-        <aside class="popup">
+        <aside class="popup popup_type_edit popup_type_edit-and-add">
             <div class="popup__container">
                 <button aria-label="Закрыть" type="button" class="popup__close-button"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form name="nameAndOccupationForm" class="popup__form">
-                    <input class="popup__form-item" type="text" id="name" name="name">
-                    <input class="popup__form-item" type="text" id="occupation" name="occupation">
+                    <input class="popup__form-item" type="text" id="popupFormName">
+                    <input class="popup__form-item" type="text" id="popupFormOccupation">
                     <button aria-label="Сохранить" type="submit" class="popup__submit-button">Сохранить</button>
                 </form>
+            </div>
+        </aside>
+
+        <aside class="popup popup_type_add popup_type_edit-and-add">
+            <div class="popup__container">
+                <button aria-label="Закрыть" type="button" class="popup__close-button popup__close-button_add-card-form"></button>
+                <h2 class="popup__title">Новое место</h2>
+                <form name="addCardPopupForm" class="popup__form popup__form_elements">
+                    <input class="popup__form-item" type="text" id="addCardPopupFormName" placeholder="Название">
+                    <input class="popup__form-item" type="text" id="addCardPopupFormLink" placeholder="Ссылка на картинку">
+                    <button aria-label="Создать" type="submit" class="popup__submit-button popup__submit-button_elements">Создать</button>
+                </form>
+            </div>
+        </aside>
+
+        <aside class="popup popup_type_open-image">
+            <div class="popup__content">
+                <button aria-label="Закрыть" type="button" class="popup__close-button popup__close-button_open-image-element"></button>
+                <img class="popup__img">
+                <h2 class="popup__text">Карачаево-Черкессия</h2>
             </div>
         </aside>
 
