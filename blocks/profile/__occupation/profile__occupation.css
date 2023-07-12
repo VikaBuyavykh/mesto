@@ -23,7 +23,7 @@
 
 @media screen and (max-width: 752px) {
     .profile__occupation {
-        width: 100%;        
+        width: 100%;
         text-align: center;
     }
 }
