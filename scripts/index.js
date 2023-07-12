@@ -4,17 +4,31 @@ const closeButtonElement = document.querySelector('.popup__close-button');
 const editButtonElement = document.querySelector('.profile__edit-button');
 const popupElement = document.querySelector('.popup_type_edit');
 const nameElement = document.querySelector('.profile__name');
-const nameFormElement = document.querySelector('#popupFormName');
+const nameFormElement = document.querySelector('#name');
 const occupationElement = document.querySelector('.profile__occupation');
-const occupationFormElement = document.querySelector('#popupFormOccupation');
+const occupationFormElement = document.querySelector('#occupation');
 const formElement = document.querySelector('.popup__form');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEscape);
 };
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEscape);
+};
+
+function closePopupByOverlay(evt) {
+  if (evt.target === evt.currentTarget){
+    closePopup(document.querySelector('.popup_opened'));
+  }
+};
+
+function closePopupByEscape(evt) {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  };
 };
 
 function handleFormSubmit(evt) {
@@ -33,6 +47,7 @@ editButtonElement.addEventListener('click', () => {
 });
 closeButtonElement.addEventListener('click', () => closePopup(popupElement));
 formElement.addEventListener('submit', handleFormSubmit);
+popupElement.addEventListener('click', closePopupByOverlay);
 
 // Отображаем исходный массив карточек
 
@@ -42,6 +57,7 @@ const openImagePopupElement = document.querySelector('.popup_type_open-image');
 const imagePopupElement = document.querySelector('.popup__img');
 const textPopupElement = document.querySelector('.popup__text');
 openImagePopupElement.querySelector('.popup__close-button_open-image-element').addEventListener('click', () => closePopup(openImagePopupElement));
+openImagePopupElement.addEventListener('click', closePopupByOverlay);
 
 function createCard({name, link}) {
   const templateItem = elementTemplate.querySelector('.element').cloneNode(true);
@@ -72,11 +88,12 @@ const addButtonElement = document.querySelector('.profile__add-button');
 const addCardPopupElement = document.querySelector('.popup_type_add');
 const addPopupCloseButtonElement = document.querySelector('.popup__close-button_add-card-form');
 const addCardFormElement = document.querySelector('.popup__form_elements');
-const nameAddCardFormElement = document.querySelector('#addCardPopupFormName');
-const linkAddCardFormElement = document.querySelector('#addCardPopupFormLink');
+const nameAddCardFormElement = document.querySelector('#cardName');
+const linkAddCardFormElement = document.querySelector('#cardLink');
 
 addButtonElement.addEventListener('click', () => openPopup(addCardPopupElement));
 addPopupCloseButtonElement.addEventListener('click', () => closePopup(addCardPopupElement));
+addCardPopupElement.addEventListener('click', closePopupByOverlay);
 addCardFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const cardElement = createCard({name: nameAddCardFormElement.value, link: linkAddCardFormElement.value});

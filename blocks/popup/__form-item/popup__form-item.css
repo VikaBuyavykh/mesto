@@ -1,11 +1,12 @@
 .popup__form-item {
     margin: 0;
+    margin-bottom: 20.6px;
     width: 100%;
-    padding: 13px 0 8px;
+    padding: 9.4px 0 11px;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 17px;
+    line-height: normal;
     color: #000000;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -14,6 +15,3 @@
     box-sizing: border-box;
 }
 
-.popup__form-item:first-of-type {
-    margin-bottom: 18px;
-}

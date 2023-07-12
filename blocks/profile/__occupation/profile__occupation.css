@@ -18,12 +18,12 @@
     .profile__occupation {
         font-size: 14px;
         line-height: 17px;
-        text-align: center;
     }    
 }
 
 @media screen and (max-width: 752px) {
     .profile__occupation {
-        width: 100%;
+        width: 100%;        
+        text-align: center;
     }
 }
