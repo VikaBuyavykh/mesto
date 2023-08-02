@@ -1,14 +1,14 @@
-import { openPopup } from "./index.js";
+import { openPopup, openPopupElem } from "./index.js";
 
 class Card {
-    constructor({name, link}) {
+    constructor({name, link}, templateElem) {
         this._name = name;
         this._link = link;
+        this._template = templateElem;
     }
 
     _getTemplate() {
-        const newTemplate = document
-        .querySelector('#element').content
+        const newTemplate = this._template.content
         .querySelector('.element').cloneNode(true);
 
         return newTemplate;
@@ -24,10 +24,11 @@ class Card {
 
     _handleClickDelete() {
         this._newCard.remove();
+        this._newCard = null;
     }
 
-    _handleClickLike(evt) {
-        evt.target.classList.toggle('element__like-button_active');
+    _handleClickLike() {
+        this._likeElem.classList.toggle('element__like-button_active');
     }
 
     _handleClickOpen() {
@@ -37,8 +38,7 @@ class Card {
         const textPopupElem = document.querySelector('.popup__text');
         textPopupElem.textContent = this._name;
 
-        const theWholePopupElem = document.querySelector('.popup_type_open-image');
-        openPopup(theWholePopupElem);
+        openPopup(openPopupElem);
     }
 
     _setListeners() {
@@ -47,8 +47,8 @@ class Card {
             this._handleClickDelete();
         });
 
-        const likeElem = this._newCard.querySelector('.element__like-button');
-        likeElem.addEventListener('click', (evt) => {
+        this._likeElem = this._newCard.querySelector('.element__like-button');
+        this._likeElem.addEventListener('click', (evt) => {
             this._handleClickLike(evt);
         });
 

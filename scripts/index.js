@@ -1,7 +1,7 @@
 import { initialCards } from "./cards.js";
-import Card from "./card.js";
+import Card from "./Card.js";
 import { validationConfig } from "./config.js";
-import FormValidator from "./validate.js";
+import FormValidator from "./FormValidator.js";
 
 const editButtonElement = document.querySelector('.profile__edit-button');
 const popupElement = document.querySelector('.popup_type_edit');
@@ -17,6 +17,8 @@ const addCardFormElement = document.querySelector('.popup__form_elements');
 const nameAddCardFormElement = document.querySelector('#cardName');
 const linkAddCardFormElement = document.querySelector('#cardLink');
 const popupList = document.querySelectorAll('.popup');
+const templateElem = document.querySelector('#element');
+export const openPopupElem = document.querySelector('.popup_type_open-image');
 
 export function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -43,6 +45,11 @@ function handleFormSubmit(evt) {
   closePopup(popupElement);
 };
 
+function createCard(item, templateElem) {
+  const cardElement = new Card(item, templateElem);
+  return cardElement.getView();
+};
+
 editButtonElement.addEventListener('click', () => {
   openPopup(popupElement);
   nameFormElement.value = nameElement.textContent;
@@ -51,15 +58,16 @@ editButtonElement.addEventListener('click', () => {
 formElement.addEventListener('submit', handleFormSubmit);
 
 initialCards.forEach((item) => {
-  const cardElement = new Card(item);
-  elementsContainer.append(cardElement.getView());
+  elementsContainer.append(createCard(item, templateElem));
 });
 
 addButtonElement.addEventListener('click', () => openPopup(addCardPopupElement));
 addCardFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    const cardElement = new Card({name: nameAddCardFormElement.value, link: linkAddCardFormElement.value});
-    elementsContainer.prepend(cardElement.getView());
+    elementsContainer.prepend(createCard(
+      {name: nameAddCardFormElement.value, 
+      link: linkAddCardFormElement.value}, 
+      templateElem));
     addCardFormElement.reset();
     closePopup(addCardPopupElement);
 });
@@ -72,12 +80,6 @@ popupList.forEach((popup) => {
     };
   });
 });
-
-/*const formList = Array.from(document.querySelectorAll('.popup__form'));
-formList.forEach((formElem) => {
-  const validationElem = new FormValidator;
-  validationElem.enableValidation(formElem, validationConfig);
-})*/
 
 const formList = Array.from(document.querySelectorAll('.popup__form'));
 formList.forEach((formElem) => {
