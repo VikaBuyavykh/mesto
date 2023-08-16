@@ -1,10 +1,9 @@
-import { openPopup, openPopupElem } from "./index.js";
-
 class Card {
-    constructor({name, link}, templateElem) {
+    constructor({name, link}, templateElem, handleCardClick) {
         this._name = name;
         this._link = link;
         this._template = templateElem;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -32,13 +31,7 @@ class Card {
     }
 
     _handleClickOpen() {
-        const imgPopupElem = document.querySelector('.popup__img');
-        imgPopupElem.src = this._link;
-
-        const textPopupElem = document.querySelector('.popup__text');
-        textPopupElem.textContent = this._name;
-
-        openPopup(openPopupElem);
+        this._handleCardClick();
     }
 
     _setListeners() {

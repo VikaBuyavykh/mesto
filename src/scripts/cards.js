@@ -13,7 +13,7 @@ export const initialCards = [
     },
     {
       name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+      link: 'https://www.hse.ru/data/2023/02/03/2046656006/1iStock-1382275244.jpg'
     },
     {
       name: 'Холмогорский район',
