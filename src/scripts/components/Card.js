@@ -19,6 +19,7 @@ class Card {
 
         const link = this._newCard.querySelector('.element__img');
         link.src = this._link;
+        link.alt = this._name;
     }
 
     _handleClickDelete() {
@@ -31,7 +32,7 @@ class Card {
     }
 
     _handleClickOpen() {
-        this._handleCardClick();
+        this._handleCardClick(this._name, this._link);
     }
 
     _setListeners() {

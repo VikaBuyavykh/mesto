@@ -6,16 +6,15 @@ class UserInfo {
 
     getUserInfo() {
         this._userValues = {
-            name: this._userName,
-            occupation: this._userInfo
+            name: this._userName.textContent,
+            occupation: this._userInfo.textContent
         };
         return this._userValues;
     }
 
-    setUserInfo() {
-        const userValues = this.getUserInfo();
-        document.querySelector('#name').value = userValues.name.textContent;
-        document.querySelector('#occupation').value = userValues.occupation.textContent;
+    setUserInfo(data) {
+        this._userName.textContent = data.name;
+        this._userInfo.textContent = data.occupation;
     }
 }
 
