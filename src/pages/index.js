@@ -65,11 +65,14 @@ const profile = new UserInfo({
 
 const editPopupElem = new PopupWithForm({
   popupSelector: '.popup_type_edit',
-  handleFormSubmit: (data) => {
+  handleFormSubmit: (data, button, text) => {
     api.editProfileInfo({ name: data.name, about: data.occupation })  
       .then((data) => {
         profile.setUserInfo(data);
         editPopupElem.close();
+      })
+      .finally(() => {
+        button.textContent = text;
       })
   }
 });
@@ -85,7 +88,7 @@ editPopupElem.setEventListeners();
 
 const addPopupElem = new PopupWithForm({
   popupSelector: '.popup_type_add',
-  handleFormSubmit: (formData) => {
+  handleFormSubmit: (formData, button, text) => {
     api.addCard({ name: formData.cardName, link: formData.cardLink })
       .then((formData) => {
         const card = createCard({
@@ -97,6 +100,9 @@ const addPopupElem = new PopupWithForm({
         });
         cardsList.addNewItem(card);
         addPopupElem.close();
+      })
+      .finally(() => {
+        button.textContent = text;
       })   
   }
 });
@@ -111,13 +117,16 @@ addPopupElem.setEventListeners();
 
 export const confirmPopup = new ConfirmPopup({
   popupSelector: '.popup_type_delete',
-  handleClick: (card, id) => {
+  handleClick: (card, id, button, text) => {
       api.deleteCard(id)
           .then(() => {
               card.remove();
               card = null;
+              confirmPopup.close();
           })
-          confirmPopup.close();          
+          .finally(() => {
+            button.textContent = text;
+          })      
   }
 })
 
@@ -131,11 +140,14 @@ popupWithImgEl.setEventListeners();
 
 const updatePopupElem = new PopupWithForm({
   popupSelector: '.popup_type_renew',
-  handleFormSubmit: (data) => {
+  handleFormSubmit: (data, button, text) => {
     api.updateAvatar({ avatar: data.link })
       .then((data) => {
         createAvatar(data);
         updatePopupElem.close();
+      })
+      .finally(() => {
+        button.textContent = text;
       })
   }
 });
