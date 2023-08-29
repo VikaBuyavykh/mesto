@@ -14,7 +14,7 @@ class UserInfo {
 
     setUserInfo(data) {
         this._userName.textContent = data.name;
-        this._userInfo.textContent = data.occupation;
+        this._userInfo.textContent = data.about;
     }
 }
 

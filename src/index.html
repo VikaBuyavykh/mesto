@@ -19,7 +19,9 @@
 
             <section class="profile">
                 <div class="profile__content">
-                    <div class="profile__avatar"></div>
+                    <div class="profile__avatar">
+                            <div class="profile__hover-avatar"></div>
+                        </div>
                     <div class="profile__info">
                         <div class="profile__name-section">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -41,7 +43,10 @@
                         <button aria-label="Открыть" type="button" class="element__open-button"><img alt="Пейзаж" class="element__img"></button>
                         <div class="element__text-section">
                             <h2 class="element__text"></h2>
-                            <button aria-label="Нравится" type="button" class="element__like-button"></button>
+                            <div class="element__like-section">
+                                <button aria-label="Нравится" type="button" class="element__like-button"></button>
+                                <p class="element__number-of-likes">0</p>
+                            </div>
                         </div>
                         <button aria-label="Удалить" type="button" class="element__delete-button"></button>
                     </div>
@@ -99,6 +104,29 @@
                 <button aria-label="Закрыть" type="button" class="popup__close-button popup__close-button_open-image-element"></button>
                 <img class="popup__img">
                 <h2 class="popup__text">Карачаево-Черкессия</h2>
+            </div>
+        </aside>
+
+        <aside class="popup popup_type_delete">
+            <div class="popup__container">
+                <button aria-label="Закрыть" type="button" class="popup__close-button"></button>
+                <h2 class="popup__title popup__title_type_delete">Вы уверены?</h2>
+                <button aria-label="Удалить" type="button" class="popup__submit-button popup__confirm-button">Да</button>
+            </div>
+        </aside>
+
+        <aside class="popup popup_type_renew">
+            <div class="popup__container">
+                <button aria-label="Закрыть" type="button" class="popup__close-button"></button>
+                <h2 class="popup__title">Обновить аватар</h2>
+                <form name="renewPopupForm" id="renewPopupForm" class="popup__form popup__form_avatar" novalidate>
+                    <div class="popup__input-contaner">
+                        <input class="popup__form-item" type="url" id="cardLink" name="link" 
+                        placeholder="Ссылка на аватар" required>
+                        <span class="popup__error-message" id="error-cardLink"></span>
+                    </div>
+                    <button aria-label="Сохранить" type="submit" class="popup__submit-button">Сохранить</button>
+                </form>
             </div>
         </aside>
 
