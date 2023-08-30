@@ -1,5 +1,5 @@
 import './index.css';
-import { editButtonElement, addButtonElement, elementsContainerSelector, 
+import { editButtonElement, addButtonElement, confirmButton, elementsContainerSelector, 
   templateElem, formList, avatarElem, nameElem, aboutElem } from "../scripts/utils/constants.js";
 import { validationConfig } from "../scripts/config.js";
 import FormValidator from "../scripts/components/FormValidator.js";
@@ -10,8 +10,6 @@ import UserInfo from '../scripts/components/UserInfo.js';
 import Card from "../scripts/components/Card.js";
 import Api from '../scripts/components/Api.js';
 import ConfirmPopup from '../scripts/components/ConfirmPopup.js';
-
-/////Функции
 
 function createCard(item) {
   const cardElement = new Card(item, templateElem, handleCardClick, userData);
@@ -26,8 +24,6 @@ function createAvatar(data) {
   avatarElem.style.backgroundImage = `url('${data.avatar}')`;
 }
 
-/////Апи
-
 export const api = new Api({
   url: "https://mesto.nomoreparties.co/v1/cohort-74/",
   headers:{
@@ -35,8 +31,6 @@ export const api = new Api({
     "Content-Type": "application/json"
   }
 });
-
-///////Отрисовываем карточки и получаем инфо юзера
 
 let userData;
 
@@ -54,9 +48,10 @@ Promise.all([api.getProfile(), api.getCards()])
     createAvatar(profileData);
     userData = profileData;
     cardsList.renderItems(cardsData);
+  })
+  .catch((err) => {
+    console.log(err);
 })
-
-//////Попап редактирования профиля
 
 const profile = new UserInfo({
   userNameSelector: '.profile__name', 
@@ -71,9 +66,12 @@ const editPopupElem = new PopupWithForm({
         profile.setUserInfo(data);
         editPopupElem.close();
       })
+      .catch((err) => {
+        console.log(err);
+      })
       .finally(() => {
         button.textContent = text;
-      })
+      })      
   }
 });
 
@@ -83,8 +81,6 @@ editButtonElement.addEventListener('click', () => {
 });
 
 editPopupElem.setEventListeners();
-
-//////Попап добавления карточки
 
 const addPopupElem = new PopupWithForm({
   popupSelector: '.popup_type_add',
@@ -101,6 +97,9 @@ const addPopupElem = new PopupWithForm({
         cardsList.addNewItem(card);
         addPopupElem.close();
       })
+      .catch((err) => {
+        console.log(err);
+      })
       .finally(() => {
         button.textContent = text;
       })   
@@ -113,16 +112,17 @@ addButtonElement.addEventListener('click', () => {
 
 addPopupElem.setEventListeners();
 
-//////////Попап подтверждения удаления карточки
-
 export const confirmPopup = new ConfirmPopup({
   popupSelector: '.popup_type_delete',
   handleClick: (card, id, button, text) => {
       api.deleteCard(id)
           .then(() => {
-              card.remove();
-              card = null;
-              confirmPopup.close();
+            card.remove();
+            card = null;
+            confirmPopup.close();              
+          })
+          .catch((err) => {
+            console.log(err);
           })
           .finally(() => {
             button.textContent = text;
@@ -130,13 +130,13 @@ export const confirmPopup = new ConfirmPopup({
   }
 })
 
-/////Попап с картинкой
+confirmButton.addEventListener('click', () => {
+  confirmPopup.activateDeletion();
+})
 
 const popupWithImgEl = new PopupWithImage('.popup_type_open-image');
 
 popupWithImgEl.setEventListeners();
-
-////////Попап апдейта аватара
 
 const updatePopupElem = new PopupWithForm({
   popupSelector: '.popup_type_renew',
@@ -145,6 +145,9 @@ const updatePopupElem = new PopupWithForm({
       .then((data) => {
         createAvatar(data);
         updatePopupElem.close();
+      })
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         button.textContent = text;
@@ -156,8 +159,6 @@ avatarElem.addEventListener('click', () => {
   updatePopupElem.open();
   updatePopupElem.setEventListeners();
 })
-
-////////Валидация
 
 formList.forEach((formElem) => {
   const validationElem = new FormValidator(formElem, validationConfig);

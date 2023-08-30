@@ -43,7 +43,8 @@ class Card {
 
     _handleClickDelete() {
         confirmPopup.open();
-        confirmPopup.setEventListeners(this._newCard, this._id);
+        confirmPopup.setEventListeners();
+        confirmPopup.deliverData(this._newCard, this._id);
     }
 
     _handleClickLike() {
@@ -53,11 +54,17 @@ class Card {
                     this._likeElem.classList.add('element__like-button_active');
                     this._number.textContent = data.likes.length;
                 })
+                .catch((err) => {
+                    console.log(err);
+                })
         } else {
             api.dislikeCard(this._id)
                 .then((data) => {
                     this._likeElem.classList.remove('element__like-button_active');
                     this._number.textContent = data.likes.length;
+                })
+                .catch((err) => {
+                    console.log(err);
                 })
         }
     }
