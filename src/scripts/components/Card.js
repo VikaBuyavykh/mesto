@@ -1,7 +1,5 @@
-import { api, confirmPopup } from "../../pages/index.js";
-
 class Card {
-    constructor({name, link, _id, likes, owner}, templateElem, handleCardClick, userData) {
+    constructor({name, link, _id, likes, owner}, templateElem, handleCardClick, userData, confirmPopup, setLike) {
         this._name = name;
         this._link = link;
         this._id = _id;
@@ -10,6 +8,8 @@ class Card {
         this._template = templateElem;
         this._handleCardClick = handleCardClick;
         this._userData = userData;
+        this._confirmPopup = confirmPopup;
+        this._setLike = setLike;
     }
 
     _getTemplate() {
@@ -42,31 +42,12 @@ class Card {
     }
 
     _handleClickDelete() {
-        confirmPopup.open();
-        confirmPopup.setEventListeners();
-        confirmPopup.deliverData(this._newCard, this._id);
+        this._confirmPopup.open();
+        this._confirmPopup.deliverData(this._newCard, this._id);
     }
 
     _handleClickLike() {
-        if (!this._likeElem.classList.contains('element__like-button_active')) {
-            api.likeCard(this._id)
-                .then((data) => {
-                    this._likeElem.classList.add('element__like-button_active');
-                    this._number.textContent = data.likes.length;
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-        } else {
-            api.dislikeCard(this._id)
-                .then((data) => {
-                    this._likeElem.classList.remove('element__like-button_active');
-                    this._number.textContent = data.likes.length;
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-        }
+        this._setLike(this._id, this._likeElem, this._number);
     }
 
     _handleClickOpen() {

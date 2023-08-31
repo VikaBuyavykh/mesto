@@ -1,6 +1,6 @@
 import './index.css';
 import { editButtonElement, addButtonElement, confirmButton, elementsContainerSelector, 
-  templateElem, formList, avatarElem, nameElem, aboutElem } from "../scripts/utils/constants.js";
+  templateElem, avatarElem, formList } from "../scripts/utils/constants.js";
 import { validationConfig } from "../scripts/config.js";
 import FormValidator from "../scripts/components/FormValidator.js";
 import Section from '../scripts/components/Section.js';
@@ -11,8 +11,15 @@ import Card from "../scripts/components/Card.js";
 import Api from '../scripts/components/Api.js';
 import ConfirmPopup from '../scripts/components/ConfirmPopup.js';
 
+const profile = new UserInfo({
+  userNameSelector: '.profile__name', 
+  userInfoSelector: '.profile__occupation',
+  userAvatarSelector: '.profile__avatar',
+  userId: ''
+});
+
 function createCard(item) {
-  const cardElement = new Card(item, templateElem, handleCardClick, userData);
+  const cardElement = new Card(item, templateElem, handleCardClick, userData, confirmPopup, setLike);
   return cardElement.getView();
 };
 
@@ -20,9 +27,22 @@ function handleCardClick(name, link) {
   popupWithImgEl.open(name, link);
 };
 
-function createAvatar(data) {
-  avatarElem.style.backgroundImage = `url('${data.avatar}')`;
-}
+function setLike(id, likeElem, numberElem) {
+  if (!likeElem.classList.contains('element__like-button_active')) {
+    api.likeCard(id)
+        .then((data) => {
+            likeElem.classList.add('element__like-button_active');
+            numberElem.textContent = data.likes.length;
+        })
+        .catch(console.error)
+} else {
+    api.dislikeCard(id)
+        .then((data) => {
+            likeElem.classList.remove('element__like-button_active');
+            numberElem.textContent = data.likes.length;
+        })
+        .catch(console.error)
+}}
 
 export const api = new Api({
   url: "https://mesto.nomoreparties.co/v1/cohort-74/",
@@ -43,20 +63,11 @@ const cardsList = new Section({
 
 Promise.all([api.getProfile(), api.getCards()])
   .then(([profileData, cardsData]) => {
-    nameElem.textContent = profileData.name;
-    aboutElem.textContent = profileData.about;
-    createAvatar(profileData);
+    profile.setUserInfo(profileData);
     userData = profileData;
     cardsList.renderItems(cardsData);
   })
-  .catch((err) => {
-    console.log(err);
-})
-
-const profile = new UserInfo({
-  userNameSelector: '.profile__name', 
-  userInfoSelector: '.profile__occupation'
-});
+  .catch(console.error)
 
 const editPopupElem = new PopupWithForm({
   popupSelector: '.popup_type_edit',
@@ -66,9 +77,7 @@ const editPopupElem = new PopupWithForm({
         profile.setUserInfo(data);
         editPopupElem.close();
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch(console.error)
       .finally(() => {
         button.textContent = text;
       })      
@@ -97,9 +106,7 @@ const addPopupElem = new PopupWithForm({
         cardsList.addNewItem(card);
         addPopupElem.close();
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch(console.error)
       .finally(() => {
         button.textContent = text;
       })   
@@ -121,9 +128,7 @@ export const confirmPopup = new ConfirmPopup({
             card = null;
             confirmPopup.close();              
           })
-          .catch((err) => {
-            console.log(err);
-          })
+          .catch(console.error)
           .finally(() => {
             button.textContent = text;
           })      
@@ -132,7 +137,9 @@ export const confirmPopup = new ConfirmPopup({
 
 confirmButton.addEventListener('click', () => {
   confirmPopup.activateDeletion();
-})
+});
+
+confirmPopup.setEventListeners();
 
 const popupWithImgEl = new PopupWithImage('.popup_type_open-image');
 
@@ -143,12 +150,10 @@ const updatePopupElem = new PopupWithForm({
   handleFormSubmit: (data, button, text) => {
     api.updateAvatar({ avatar: data.link })
       .then((data) => {
-        createAvatar(data);
+        profile.setUserInfo(data);
         updatePopupElem.close();
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch(console.error)
       .finally(() => {
         button.textContent = text;
       })
@@ -157,8 +162,9 @@ const updatePopupElem = new PopupWithForm({
 
 avatarElem.addEventListener('click', () => {
   updatePopupElem.open();
-  updatePopupElem.setEventListeners();
-})
+});
+
+updatePopupElem.setEventListeners();
 
 formList.forEach((formElem) => {
   const validationElem = new FormValidator(formElem, validationConfig);
