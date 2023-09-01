@@ -28,17 +28,19 @@ function handleCardClick(card) {
 };
 
 function handleLike(card) {
-  api.likeCard(card._id)
+  api.likeCard(card.id)
         .then((data) => {
-            card._number.textContent = data.likes.length;
+            card.number.textContent = data.likes.length;
+            card.likeElem.classList.add('element__like-button_active');
         })
         .catch(console.error)
 }
 
 function handleDislike(card) {
-  api.dislikeCard(card._id)
+  api.dislikeCard(card.id)
         .then((data) => {
-          card._number.textContent = data.likes.length;
+          card.number.textContent = data.likes.length;
+          card.likeElem.classList.remove('element__like-button_active');
         })
         .catch(console.error)
 }
@@ -71,7 +73,7 @@ Promise.all([api.getProfile(), api.getCards()])
 const editPopupElem = new PopupWithForm({
   popupSelector: '.popup_type_edit',
   handleFormSubmit: (data, button, text) => {
-    api.editProfileInfo({ name: data.name, about: data.occupation })  
+    api.editProfileInfo({ name: data.name, about: data.occupation })
       .then((data) => {
         profile.setUserInfo(data);
         editPopupElem.close();
@@ -96,7 +98,7 @@ const addPopupElem = new PopupWithForm({
     api.addCard({ name: formData.cardName, link: formData.cardLink })
       .then((formData) => {
         const card = createCard({
-          name: formData.name, 
+          name: formData.name,
           link: formData.link,
           _id: formData._id,
           likes: [],
@@ -121,15 +123,15 @@ addPopupElem.setEventListeners();
 export const confirmPopup = new ConfirmPopup({
   popupSelector: '.popup_type_delete',
   handleClick: (item) => {
-      api.deleteCard(item._id)
+      api.deleteCard(item.id)
           .then(() => {
-            item._card.remove();
-            item._card = null;
+            item.card.remove();
+            item.card = null;
             confirmPopup.close();              
           })
           .catch(console.error)
           .finally(() => {
-            item._confirmButton.textContent = item._buttonTextElem;
+            item.confirmButton.textContent = item.buttonTextElem;
           })      
   }
 })
