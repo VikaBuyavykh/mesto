@@ -10,12 +10,12 @@ class ConfirmPopup extends Popup {
 
     activateDeletion() {
         this._confirmButton.textContent = 'Сохранение...';
-        this._handleClick(this._card, this._id, this._confirmButton, this._buttonTextElem);
+        this._handleClick(this);
     }
 
-    deliverData(card, id) {
-        this._card = card;
-        this._id = id;
+    deliverData(card) {
+        this._card = card._newCard;
+        this._id = card._id;
     }
 }
 

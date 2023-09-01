@@ -19,30 +19,29 @@ const profile = new UserInfo({
 });
 
 function createCard(item) {
-  const cardElement = new Card(item, templateElem, handleCardClick, userData, confirmPopup, setLike);
+  const cardElement = new Card(item, templateElem, handleCardClick, userData, confirmPopup, handleLike, handleDislike);
   return cardElement.getView();
 };
 
-function handleCardClick(name, link) {
-  popupWithImgEl.open(name, link);
+function handleCardClick(card) {
+  popupWithImgEl.open(card);
 };
 
-function setLike(id, likeElem, numberElem) {
-  if (!likeElem.classList.contains('element__like-button_active')) {
-    api.likeCard(id)
+function handleLike(card) {
+  api.likeCard(card._id)
         .then((data) => {
-            likeElem.classList.add('element__like-button_active');
-            numberElem.textContent = data.likes.length;
+            card._number.textContent = data.likes.length;
         })
         .catch(console.error)
-} else {
-    api.dislikeCard(id)
+}
+
+function handleDislike(card) {
+  api.dislikeCard(card._id)
         .then((data) => {
-            likeElem.classList.remove('element__like-button_active');
-            numberElem.textContent = data.likes.length;
+          card._number.textContent = data.likes.length;
         })
         .catch(console.error)
-}}
+}
 
 export const api = new Api({
   url: "https://mesto.nomoreparties.co/v1/cohort-74/",
@@ -121,16 +120,16 @@ addPopupElem.setEventListeners();
 
 export const confirmPopup = new ConfirmPopup({
   popupSelector: '.popup_type_delete',
-  handleClick: (card, id, button, text) => {
-      api.deleteCard(id)
+  handleClick: (item) => {
+      api.deleteCard(item._id)
           .then(() => {
-            card.remove();
-            card = null;
+            item._card.remove();
+            item._card = null;
             confirmPopup.close();              
           })
           .catch(console.error)
           .finally(() => {
-            button.textContent = text;
+            item._confirmButton.textContent = item._buttonTextElem;
           })      
   }
 })
