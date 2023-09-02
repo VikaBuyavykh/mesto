@@ -30,8 +30,7 @@ function handleCardClick(card) {
 function handleLike(card) {
   api.likeCard(card.id)
         .then((data) => {
-            card.number.textContent = data.likes.length;
-            card.likeElem.classList.add('element__like-button_active');
+            card.addLikes(data.likes.length);
         })
         .catch(console.error)
 }
@@ -39,8 +38,7 @@ function handleLike(card) {
 function handleDislike(card) {
   api.dislikeCard(card.id)
         .then((data) => {
-          card.number.textContent = data.likes.length;
-          card.likeElem.classList.remove('element__like-button_active');
+          card.removeLikes(data.likes.length);
         })
         .catch(console.error)
 }
